@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HazelcastWebUI.Controllers
 {
-    public class CityController : Controller
+    public sealed class CityController : Controller
     {
         private readonly ICitiesService _citiesService;
 

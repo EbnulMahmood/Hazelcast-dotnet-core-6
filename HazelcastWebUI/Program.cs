@@ -5,8 +5,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var hazelcastOptions = builder.Configuration.GetSection("hazelcast").Get<HazelcastOptions>();
+
 builder.Services.AddSingleton<ICitiesService, CitiesService>(service =>
     new CitiesService(hazelcastOptions)
+);
+
+builder.Services.AddSingleton<ICountriesService, CountriesService>(service =>
+    new CountriesService(hazelcastOptions)
 );
 
 builder.Services.AddControllersWithViews();
