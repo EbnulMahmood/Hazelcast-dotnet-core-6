@@ -42,6 +42,15 @@ namespace HazelcastAPI.Controllers
         }
 
         [HttpGet]
+        [Route("/cities/load-with-population-area-mayor")]
+        public async Task<JsonResult> LoadCitiesWithPopulationAreaMayor(CancellationToken token = default)
+        {
+            var cities = await _citiesService.LoadCitiesWithPopulationAreaMayorAsync(token);
+
+            return new JsonResult(cities);
+        }
+
+        [HttpGet]
         [Route("/cities/load-by-country/{country}")]
         public async Task<JsonResult> LoadCities(string country, CancellationToken token = default)
         {

@@ -1,6 +1,6 @@
-﻿@model IEnumerable<Model.CityWithPopulationArea>
+﻿@model IEnumerable<Model.CityWithPopulationAreaMayor>
 @{
-    ViewData["Title"] = "Areas";
+    ViewData["Title"] = "Mayors";
 }
 <table class="table">
     <thead>
@@ -10,6 +10,8 @@
             <th scope="col">Country</th>
             <th scope="col">Population</th>
             <th scope="col">Area</th>
+            <th scope="col">Mayor</th>
+            <th scope="col">Age</th>
 
         </tr>
     </thead>
@@ -25,6 +27,8 @@
                 <td>@item.CountryName</td>
                 <td>@item.Population</td>
                 <td>@item.Area km²</td>
+                <td>@item.MayorName</td>
+                <td>@item.Age</td>
             </tr>
             i++;
         }
