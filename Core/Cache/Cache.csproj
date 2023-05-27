@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hazelcast.Net" Version="5.2.1" />
+    <PackageReference Include="System.Linq.Async" Version="6.0.1" />
   </ItemGroup>
 
   <ItemGroup>

@@ -29,17 +29,13 @@ SELECT c.country, c.city FROM city AS c
 ORDER BY c.city;
 ", cancellationToken: token);
 
-            var cityList = new List<City>();
-            await foreach (var row in result)
-            {
-                cityList.Add(new City
-                {
-                    CityName = row.GetColumn<string>("city"),
-                    CountryName = row.GetColumn<string>("country"),
-                });
-            }
-
-            return cityList;
+            return await result.Select(row =>
+                    new City
+                    {
+                        CityName = row.GetColumn<string>("city"),
+                        CountryName = row.GetColumn<string>("country"),
+                    }
+                ).ToListAsync(cancellationToken: token);
         }
 
         public async Task<IEnumerable<City>> LoadCitiesByCountryNameAsync(string countryName, CancellationToken token = default)
@@ -52,17 +48,13 @@ WHERE c.country LIKE '%{countryName?.Trim()}%'
 ORDER BY c.city;
 ", cancellationToken: token);
 
-            var cityList = new List<City>();
-            await foreach (var row in result)
-            {
-                cityList.Add(new City
-                {
-                    CityName = row.GetColumn<string>("city"),
-                    CountryName = row.GetColumn<string>("country"),
-                });
-            }
-
-            return cityList;
+            return await result.Select(row =>
+                    new City
+                    {
+                        CityName = row.GetColumn<string>("city"),
+                        CountryName = row.GetColumn<string>("country"),
+                    }
+                ).ToListAsync(cancellationToken: token);
         }
 
         public async Task<IEnumerable<CityWithPopulation>> LoadCitiesWithPopulationAsync(CancellationToken token = default)
@@ -76,18 +68,14 @@ JOIN population2020
 ON city.city = population2020.city;
 ", cancellationToken: token);
 
-            var cityList = new List<CityWithPopulation>();
-            await foreach (var row in result)
-            {
-                cityList.Add(new CityWithPopulation
-                {
-                    CityName = row.GetColumn<string>("city"),
-                    CountryName = row.GetColumn<string>("country"),
-                    Population = row.GetColumn<int>("population"),
-                });
-            }
-
-            return cityList;
+            return await result.Select(row =>
+                    new CityWithPopulation
+                    {
+                        CityName = row.GetColumn<string>("city"),
+                        CountryName = row.GetColumn<string>("country"),
+                        Population = row.GetColumn<int>("population"),
+                    }
+                ).ToListAsync(cancellationToken: token);
         }
 
         public async Task<IEnumerable<CityWithPopulationArea>> LoadCitiesWithPopulationAreaAsync(CancellationToken token = default)
@@ -108,19 +96,15 @@ ON city.city = area.city
 ORDER BY area.area DESC;
 ", cancellationToken: token);
 
-            var cityList = new List<CityWithPopulationArea>();
-            await foreach (var row in result)
-            {
-                cityList.Add(new CityWithPopulationArea
-                {
-                    CityName = row.GetColumn<string>("city"),
-                    CountryName = row.GetColumn<string>("country"),
-                    Population = row.GetColumn<int>("population"),
-                    Area = row.GetColumn<double>("area"),
-                });
-            }
-
-            return cityList;
+            return await result.Select(row =>
+                    new CityWithPopulationArea
+                    {
+                        CityName = row.GetColumn<string>("city"),
+                        CountryName = row.GetColumn<string>("country"),
+                        Population = row.GetColumn<int>("population"),
+                        Area = row.GetColumn<double>("area"),
+                    }
+                ).ToListAsync(cancellationToken: token);
         }
     }
 }
