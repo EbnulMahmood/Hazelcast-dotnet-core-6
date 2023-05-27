@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33717.318
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HazelcastAPI", "HazelcastAPI\HazelcastAPI.csproj", "{53986A9C-3CBB-422A-BEF9-E3314EB5277A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0F88D973-99BA-44F3-AEE0-F8E19AB925CC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cache", "Core\Cache\Cache.csproj", "{955659E5-29FB-4C8E-B1FC-BD6520DF224F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Core\Model\Model.csproj", "{CF455358-7AAB-4206-86D4-BCF044E7791B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HazelcastWebUI", "HazelcastWebUI\HazelcastWebUI.csproj", "{6EDD9619-6B06-414D-B77D-4798F139577A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{53986A9C-3CBB-422A-BEF9-E3314EB5277A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53986A9C-3CBB-422A-BEF9-E3314EB5277A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53986A9C-3CBB-422A-BEF9-E3314EB5277A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53986A9C-3CBB-422A-BEF9-E3314EB5277A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{955659E5-29FB-4C8E-B1FC-BD6520DF224F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{955659E5-29FB-4C8E-B1FC-BD6520DF224F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{955659E5-29FB-4C8E-B1FC-BD6520DF224F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{955659E5-29FB-4C8E-B1FC-BD6520DF224F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CF455358-7AAB-4206-86D4-BCF044E7791B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CF455358-7AAB-4206-86D4-BCF044E7791B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CF455358-7AAB-4206-86D4-BCF044E7791B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CF455358-7AAB-4206-86D4-BCF044E7791B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EDD9619-6B06-414D-B77D-4798F139577A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EDD9619-6B06-414D-B77D-4798F139577A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EDD9619-6B06-414D-B77D-4798F139577A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EDD9619-6B06-414D-B77D-4798F139577A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{955659E5-29FB-4C8E-B1FC-BD6520DF224F} = {0F88D973-99BA-44F3-AEE0-F8E19AB925CC}
+		{CF455358-7AAB-4206-86D4-BCF044E7791B} = {0F88D973-99BA-44F3-AEE0-F8E19AB925CC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15C7315D-7041-4125-8F19-F63BF27A0296}
+	EndGlobalSection
+EndGlobal

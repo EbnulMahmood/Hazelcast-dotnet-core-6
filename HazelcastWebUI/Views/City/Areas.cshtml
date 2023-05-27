@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Model.CityWithPopulationArea>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">Country</th>
+            <th scope="col">Population</th>
+            <th scope="col">Area</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th scope="row">@i</th>
+                <td>@item.CityName</td>
+                <td>@item.CountryName</td>
+                <td>@item.Population</td>
+                <td>@item.Area km²</td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
