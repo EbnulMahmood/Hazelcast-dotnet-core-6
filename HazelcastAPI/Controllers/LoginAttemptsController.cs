@@ -1,7 +1,7 @@
 ﻿using Cache.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HazelcastAPI
+namespace HazelcastAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
