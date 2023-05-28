@@ -1,0 +1,82 @@
+﻿CREATE MAPPING city (
+__key INT,
+country VARCHAR,
+Name VARCHAR)
+TYPE IMap
+OPTIONS('keyFormat'='int', 'valueFormat'='json-flat');
+
+INSERT INTO city VALUES
+(1, 'United Kingdom','London'),
+(2, 'United Kingdom','Manchester'),
+(3, 'United States', 'New York'),
+(4, 'United States', 'Los Angeles'),
+(5, 'Turkey', 'Ankara'),
+(6, 'Turkey', 'Istanbul'),
+(7, 'Brazil', 'Sao Paulo'),
+(8, 'Brazil', 'Rio de Janeiro');
+
+CREATE MAPPING population2020 (
+__key INT,
+city VARCHAR,
+population INT)
+TYPE IMap OPTIONS ('keyFormat'='int', 'valueFormat'='json-flat');
+
+INSERT INTO population2020 VALUES
+(1, 'London', 9304016),
+(2, 'Manchester', 2730076),
+(3, 'New York', 8622357),
+(4, 'Los Angeles', 4085014),
+(5, 'Sao Paulo', 12396372),
+(6, 'Rio de Janeiro', 6775561),
+(7, 'Istanbul', 14804116),
+(8, 'Ankara', 3517182);
+
+CREATE MAPPING area (
+__key INT,
+city VARCHAR,
+area DOUBLE)
+TYPE IMap OPTIONS ('keyFormat'='int', 'valueFormat'='json-flat');
+
+INSERT INTO area VALUES
+(1, 'London', 1572),
+(2, 'Manchester', 115.6),
+(3, 'New York', 783.8),
+(4, 'Los Angeles', 1299),
+(5, 'Sao Paulo', 1521),
+(6, 'Rio de Janeiro', 1200),
+(7, 'Istanbul', 5461),
+(8, 'Ankara', 24521);
+
+CREATE MAPPING mayor (
+__key INT,
+city VARCHAR,
+Name VARCHAR,
+electedYear INT)
+TYPE IMap OPTIONS ('keyFormat'='int', 'valueFormat'='json-flat');
+
+INSERT INTO mayor VALUES
+(1, 'London', 'Sadiq Khan', 2016),
+(2, 'Manchester', 'Andy Burnham', 2017),
+(3, 'New York', 'Eric Adams', 2022),
+(4, 'Los Angeles', 'Karen Bass', 2022),
+(5, 'Sao Paulo', 'Ricardo Nunes', 2021),
+(6, 'Rio de Janeiro', 'Eduardo Paes', 2021),
+(7, 'Istanbul', 'Ekrem İmamoğlu', 2019),
+(8, 'Ankara', 'Mansur Yavaş', 2019);
+
+CREATE MAPPING country (
+__key INT,
+Name VARCHAR,
+dialingCode VARCHAR,
+primeMinister VARCHAR,
+currency VARCHAR,
+population DOUBLE,
+officialLanguage VARCHAR)
+TYPE IMap OPTIONS ('keyFormat'='int', 'valueFormat'='json-flat');
+
+INSERT INTO country VALUES
+(1, 'United Kingdom','+44', 'Rishi Sunak', 'The pound sterling', 67.33, 'English'),
+(2, 'United States', '+1', 'Joe Biden', 'United States Dollar', 331.9, 'N\A'),
+(3, 'Turkey', '+90', 'Recep Tayyip Erdoğan', 'Turkish lira', 84.78, 'Turkish'),
+(4, 'Bangladesh', '+880', 'Sheikh Hasina', 'Bangladeshi Taka', 169.4, 'Bengali'),
+(5, 'Brazil', '+55', 'Luiz Inácio Lula da Silva', 'Brazilian Real', 214.3, 'Portuguese');

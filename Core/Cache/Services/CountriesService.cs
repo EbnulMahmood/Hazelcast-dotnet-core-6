@@ -25,7 +25,7 @@ namespace Cache.Services
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
-country,
+Name AS country,
 dialingCode,
 primeMinister,
 currency,

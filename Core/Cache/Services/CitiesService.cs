@@ -28,8 +28,8 @@ namespace Cache.Services
                 await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
-SELECT c.country, c.city FROM city AS c
-ORDER BY c.city;
+SELECT c.country, c.Name AS city FROM city AS c
+ORDER BY c.Name;
 ", cancellationToken: token);
 
                 return await result.Select(row =>
@@ -54,9 +54,9 @@ ORDER BY c.city;
                 await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
-SELECT c.country, c.city FROM city AS c
+SELECT c.country, c.Name AS city FROM city AS c
 WHERE c.country LIKE '%{countryName?.Trim()}%'
-ORDER BY c.city;
+ORDER BY c.Name;
 ", cancellationToken: token);
 
                 return await result.Select(row =>
@@ -81,10 +81,10 @@ ORDER BY c.city;
                 await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
-SELECT city.country, city.city, population2020.population AS population
+SELECT city.country, city.Name AS city, population2020.population AS population
 FROM city
 JOIN population2020
-ON city.city = population2020.city
+ON city.Name = population2020.city
 ORDER BY population2020.population DESC;
 ", cancellationToken: token);
 
@@ -113,14 +113,14 @@ ORDER BY population2020.population DESC;
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
 city.country
-,city.city
+,city.Name AS city
 ,population2020.population AS population
 ,area.area
 FROM city
 JOIN population2020
-ON city.city = population2020.city
+ON city.Name = population2020.city
 JOIN area
-ON city.city = area.city
+ON city.Name = area.city
 ORDER BY area.area DESC;
 ", cancellationToken: token);
 
@@ -150,18 +150,18 @@ ORDER BY area.area DESC;
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
 city.country
-,city.city
+,city.Name AS city
 ,population2020.population AS population
 ,area.area
-,mayor.mayor
-,mayor.age
+,mayor.Name AS mayor
+,mayor.electedYear
 FROM mayor
-JOIN city ON mayor.city = city.city
+JOIN city ON mayor.city = city.Name
 JOIN population2020
-ON city.city = population2020.city
+ON city.Name = population2020.city
 JOIN area
-ON city.city = area.city
-ORDER BY mayor.age DESC;
+ON city.Name = area.city
+ORDER BY mayor.electedYear DESC;
 ", cancellationToken: token);
 
                 return await result.Select(row =>
@@ -172,7 +172,7 @@ ORDER BY mayor.age DESC;
                             Population = row.GetColumn<int>("population"),
                             Area = row.GetColumn<double>("area"),
                             MayorName = row.GetColumn<string>("mayor"),
-                            Age = row.GetColumn<int>("age"),
+                            ElectedYear = row.GetColumn<int>("electedYear"),
                         }
                     ).ToListAsync(cancellationToken: token);
             }
