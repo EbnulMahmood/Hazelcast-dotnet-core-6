@@ -25,12 +25,12 @@ namespace Cache.Services
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
-Name AS country,
-dialingCode,
-primeMinister,
-currency,
-population,
-officialLanguage
+Name AS country
+,dialingCode
+,primeMinister
+,currency
+,population
+,officialLanguage
 FROM country;
 ", cancellationToken: token);
 

@@ -63,5 +63,18 @@ namespace HazelcastWebUI.Controllers
                 throw;
             }
         }
+
+        public async Task<IActionResult> CitiesDetails(CancellationToken token = default)
+        {
+            try
+            {
+                var cityList = await _citiesService.LoadCitiesWithPopulationAreaMayorCountryAsync(token);
+                return View(cityList);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

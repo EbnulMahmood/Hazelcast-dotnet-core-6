@@ -1,19 +1,22 @@
-﻿@model IEnumerable<Model.Country>
+﻿@model IEnumerable<Model.CityWithPopulationAreaMayorCountry>
 @{
-    ViewData["Title"] = "Countries";
+    ViewData["Title"] = "Mayors";
 }
-
 <table class="table">
     <thead>
         <tr>
             <th scope="col">#</th>
+            <th scope="col">City</th>
+            <th scope="col">City Population</th>
+            <th scope="col">City Area</th>
+            <th scope="col">Mayor</th>
+            <th scope="col">Elected Year</th>
             <th scope="col">Country</th>
             <th scope="col">Dialing Code</th>
             <th scope="col">Prime Minister</th>
             <th scope="col">Currency</th>
-            <th scope="col">Population</th>
+            <th scope="col">Country Population</th>
             <th scope="col">Official Language</th>
-
         </tr>
     </thead>
     <tbody>
@@ -24,11 +27,16 @@
         {
             <tr>
                 <th scope="row">@i</th>
+                <td>@item.CityName</td>
+                <td>@item.CityPopulation</td>
+                <td>@item.CityArea km²</td>
+                <td>@item.MayorName</td>
+                <td>@item.ElectedYear</td>
                 <td>@item.CountryName</td>
                 <td>@item.DialingCode</td>
                 <td>@item.PrimeMinister</td>
                 <td>@item.Currency</td>
-                <td>@item.Population M</td>
+                <td>@item.CountryPopulation M</td>
                 <td>@item.OfficialLanguage</td>
             </tr>
             i++;

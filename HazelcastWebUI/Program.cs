@@ -1,4 +1,4 @@
-using Cache.Services;
+using Cache.Extensions;
 using Hazelcast;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,13 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 var hazelcastOptions = builder.Configuration.GetSection("hazelcast").Get<HazelcastOptions>();
 
-builder.Services.AddSingleton<ICitiesService, CitiesService>(service =>
-    new CitiesService(hazelcastOptions)
-);
-
-builder.Services.AddSingleton<ICountriesService, CountriesService>(service =>
-    new CountriesService(hazelcastOptions)
-);
+builder.Services.AddCacheService(hazelcastOptions);
 
 builder.Services.AddControllersWithViews();
 

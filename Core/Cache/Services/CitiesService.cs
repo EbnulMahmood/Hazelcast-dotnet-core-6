@@ -10,6 +10,7 @@ namespace Cache.Services
         Task<IEnumerable<CityWithPopulation>> LoadCitiesWithPopulationAsync(CancellationToken token = default);
         Task<IEnumerable<CityWithPopulationArea>> LoadCitiesWithPopulationAreaAsync(CancellationToken token = default);
         Task<IEnumerable<CityWithPopulationAreaMayor>> LoadCitiesWithPopulationAreaMayorAsync(CancellationToken token = default);
+        Task<IEnumerable<CityWithPopulationAreaMayorCountry>> LoadCitiesWithPopulationAreaMayorCountryAsync(CancellationToken token = default);
     }
 
     public sealed class CitiesService : ICitiesService
@@ -173,6 +174,57 @@ ORDER BY mayor.electedYear DESC;
                             Area = row.GetColumn<double>("area"),
                             MayorName = row.GetColumn<string>("mayor"),
                             ElectedYear = row.GetColumn<int>("electedYear"),
+                        }
+                    ).ToListAsync(cancellationToken: token);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<CityWithPopulationAreaMayorCountry>> LoadCitiesWithPopulationAreaMayorCountryAsync(CancellationToken token = default)
+        {
+            try
+            {
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+
+                await using var result = await client.Sql.ExecuteQueryAsync(@$"
+SELECT 
+ct.Name AS city
+,p.population AS cityPopulation
+,a.area AS cityArea
+,m.Name AS mayor
+,m.electedYear
+,c.Name AS country
+,c.dialingCode
+,c.primeMinister
+,c.currency
+,c.population AS countryPopulation
+,c.officialLanguage
+FROM city AS ct
+JOIN country AS c ON c.Name = ct.country
+JOIN population2020 AS p ON p.city = ct.Name
+JOIN area AS a ON a.city = ct.Name
+JOIN mayor AS m ON m.city = ct.Name
+ORDER BY ct.__key ASC;
+", cancellationToken: token);
+
+                return await result.Select(row =>
+                        new CityWithPopulationAreaMayorCountry
+                        {
+                            CityName = row.GetColumn<string>("city"),
+                            CityPopulation = row.GetColumn<int>("cityPopulation"),
+                            CityArea = row.GetColumn<double>("cityArea"),
+                            MayorName = row.GetColumn<string>("mayor"),
+                            ElectedYear = row.GetColumn<int>("electedYear"),
+                            CountryName = row.GetColumn<string>("country"),
+                            DialingCode = row.GetColumn<string>("dialingCode"),
+                            PrimeMinister = row.GetColumn<string>("primeMinister"),
+                            Currency = row.GetColumn<string>("currency"),
+                            CountryPopulation = row.GetColumn<double>("countryPopulation"),
+                            OfficialLanguage = row.GetColumn<string>("officialLanguage"),
                         }
                     ).ToListAsync(cancellationToken: token);
             }
