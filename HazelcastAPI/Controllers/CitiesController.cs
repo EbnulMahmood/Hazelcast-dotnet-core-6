@@ -18,7 +18,7 @@ namespace HazelcastAPI.Controllers
         [Route("/cities/load")]
         public async Task<JsonResult> LoadCities(CancellationToken token = default)
         {
-            var cities = await _citiesService.LoadCitiesAsync(token);
+            var cities = await _citiesService.LoadCitiesAsync(token).ConfigureAwait(false);
 
             return new JsonResult(cities);
         }
@@ -27,7 +27,7 @@ namespace HazelcastAPI.Controllers
         [Route("/cities/load-with-population")]
         public async Task<JsonResult> LoadCitiesWithPopulation(CancellationToken token = default)
         {
-            var cities = await _citiesService.LoadCitiesWithPopulationAsync(token);
+            var cities = await _citiesService.LoadCitiesWithPopulationAsync(token).ConfigureAwait(false);
 
             return new JsonResult(cities);
         }
@@ -36,7 +36,7 @@ namespace HazelcastAPI.Controllers
         [Route("/cities/load-with-population-area")]
         public async Task<JsonResult> LoadCitiesWithPopulationArea(CancellationToken token = default)
         {
-            var cities = await _citiesService.LoadCitiesWithPopulationAreaAsync(token);
+            var cities = await _citiesService.LoadCitiesWithPopulationAreaAsync(token).ConfigureAwait(false);
 
             return new JsonResult(cities);
         }
@@ -45,7 +45,7 @@ namespace HazelcastAPI.Controllers
         [Route("/cities/load-with-population-area-mayor")]
         public async Task<JsonResult> LoadCitiesWithPopulationAreaMayor(CancellationToken token = default)
         {
-            var cities = await _citiesService.LoadCitiesWithPopulationAreaMayorAsync(token);
+            var cities = await _citiesService.LoadCitiesWithPopulationAreaMayorAsync(token).ConfigureAwait(false);
 
             return new JsonResult(cities);
         }
@@ -54,7 +54,7 @@ namespace HazelcastAPI.Controllers
         [Route("/cities/load-by-country/{country}")]
         public async Task<JsonResult> LoadCities(string country, CancellationToken token = default)
         {
-            var cities = await _citiesService.LoadCitiesByCountryNameAsync(country, token);
+            var cities = await _citiesService.LoadCitiesByCountryNameAsync(country, token).ConfigureAwait(false);
 
             return new JsonResult(cities);
         }

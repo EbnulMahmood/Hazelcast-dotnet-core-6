@@ -26,12 +26,12 @@ namespace Cache.Services
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT c.country, c.Name AS city FROM city AS c
 ORDER BY c.Name;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new City
@@ -39,7 +39,7 @@ ORDER BY c.Name;
                             CityName = row.GetColumn<string>("city"),
                             CountryName = row.GetColumn<string>("country"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -52,13 +52,13 @@ ORDER BY c.Name;
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT c.country, c.Name AS city FROM city AS c
 WHERE c.country LIKE '%{countryName?.Trim()}%'
 ORDER BY c.Name;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new City
@@ -66,7 +66,7 @@ ORDER BY c.Name;
                             CityName = row.GetColumn<string>("city"),
                             CountryName = row.GetColumn<string>("country"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -79,7 +79,7 @@ ORDER BY c.Name;
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT city.country, city.Name AS city, population2020.population AS population
@@ -87,7 +87,7 @@ FROM city
 JOIN population2020
 ON city.Name = population2020.city
 ORDER BY population2020.population DESC;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new CityWithPopulation
@@ -96,7 +96,7 @@ ORDER BY population2020.population DESC;
                             CountryName = row.GetColumn<string>("country"),
                             Population = row.GetColumn<int>("population"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -109,7 +109,7 @@ ORDER BY population2020.population DESC;
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
@@ -123,7 +123,7 @@ ON city.Name = population2020.city
 JOIN area
 ON city.Name = area.city
 ORDER BY area.area DESC;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new CityWithPopulationArea
@@ -133,7 +133,7 @@ ORDER BY area.area DESC;
                             Population = row.GetColumn<int>("population"),
                             Area = row.GetColumn<double>("area"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -146,7 +146,7 @@ ORDER BY area.area DESC;
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
@@ -163,7 +163,7 @@ ON city.Name = population2020.city
 JOIN area
 ON city.Name = area.city
 ORDER BY mayor.electedYear DESC;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new CityWithPopulationAreaMayor
@@ -175,7 +175,7 @@ ORDER BY mayor.electedYear DESC;
                             MayorName = row.GetColumn<string>("mayor"),
                             ElectedYear = row.GetColumn<int>("electedYear"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {
@@ -188,7 +188,7 @@ ORDER BY mayor.electedYear DESC;
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
@@ -209,7 +209,7 @@ JOIN population2020 AS p ON p.city = ct.Name
 JOIN area AS a ON a.city = ct.Name
 JOIN mayor AS m ON m.city = ct.Name
 ORDER BY ct.__key ASC;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new CityWithPopulationAreaMayorCountry
@@ -226,7 +226,7 @@ ORDER BY ct.__key ASC;
                             CountryPopulation = row.GetColumn<double>("countryPopulation"),
                             OfficialLanguage = row.GetColumn<string>("officialLanguage"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {

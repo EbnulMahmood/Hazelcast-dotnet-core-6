@@ -14,7 +14,7 @@ namespace HazelcastWebUI.Controllers
 
         public async Task<IActionResult> Countries()
         {
-            var countries = await _countriesService.LoadCountriesAsync();
+            var countries = await _countriesService.LoadCountriesAsync().ConfigureAwait(false);
             return View(countries);
         }
     }

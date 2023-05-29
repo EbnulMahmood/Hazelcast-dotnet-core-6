@@ -21,7 +21,7 @@ namespace Cache.Services
         {
             try
             {
-                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token);
+                await using var client = await HazelcastClientFactory.StartNewClientAsync(_options, cancellationToken: token).ConfigureAwait(false);
 
                 await using var result = await client.Sql.ExecuteQueryAsync(@$"
 SELECT 
@@ -32,7 +32,7 @@ Name AS country
 ,population
 ,officialLanguage
 FROM country;
-", cancellationToken: token);
+", cancellationToken: token).ConfigureAwait(false);
 
                 return await result.Select(row =>
                         new Country
@@ -44,7 +44,7 @@ FROM country;
                             Population = row.GetColumn<double>("population"),
                             OfficialLanguage = row.GetColumn<string>("officialLanguage"),
                         }
-                    ).ToListAsync(cancellationToken: token);
+                    ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
             }
             catch (Exception)
             {

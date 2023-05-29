@@ -16,7 +16,7 @@ namespace HazelcastWebUI.Controllers
         {
             try
             {
-                var cityList = await _citiesService.LoadCitiesAsync(token);
+                var cityList = await _citiesService.LoadCitiesAsync(token).ConfigureAwait(false);
                 return View(cityList);
             }
             catch (Exception)
@@ -29,7 +29,7 @@ namespace HazelcastWebUI.Controllers
         {
             try
             {
-                var cityList = await _citiesService.LoadCitiesWithPopulationAsync(token);
+                var cityList = await _citiesService.LoadCitiesWithPopulationAsync(token).ConfigureAwait(false);
                 return View(cityList);
             }
             catch (Exception)
@@ -42,7 +42,7 @@ namespace HazelcastWebUI.Controllers
         {
             try
             {
-                var cityList = await _citiesService.LoadCitiesWithPopulationAreaAsync(token);
+                var cityList = await _citiesService.LoadCitiesWithPopulationAreaAsync(token).ConfigureAwait(false);
                 return View(cityList);
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace HazelcastWebUI.Controllers
         {
             try
             {
-                var cityList = await _citiesService.LoadCitiesWithPopulationAreaMayorAsync(token);
+                var cityList = await _citiesService.LoadCitiesWithPopulationAreaMayorAsync(token).ConfigureAwait(false);
                 return View(cityList);
             }
             catch (Exception)
@@ -68,7 +68,7 @@ namespace HazelcastWebUI.Controllers
         {
             try
             {
-                var cityList = await _citiesService.LoadCitiesWithPopulationAreaMayorCountryAsync(token);
+                var cityList = await _citiesService.LoadCitiesWithPopulationAreaMayorCountryAsync(token).ConfigureAwait(false);
                 return View(cityList);
             }
             catch (Exception)
