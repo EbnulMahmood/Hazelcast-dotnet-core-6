@@ -80,3 +80,25 @@ INSERT INTO country VALUES
 (3, 'Turkey', '+90', 'Recep Tayyip Erdoğan', 'Turkish lira', 84.78, 'Turkish'),
 (4, 'Bangladesh', '+880', 'Sheikh Hasina', 'Bangladeshi Taka', 169.4, 'Bengali'),
 (5, 'Brazil', '+55', 'Luiz Inácio Lula da Silva', 'Brazilian Real', 214.3, 'Portuguese');
+
+// Form load test
+CREATE MAPPING customer
+(__key INT,
+name VARCHAR,
+address VARCHAR)
+TYPE IMap
+OPTIONS (
+'keyFormat'='int',
+'valueFormat'='json-flat'
+);
+
+CREATE MAPPING customerOrder
+(__key INT,
+customerId INT,
+items VARCHAR,
+price DOUBLE)
+TYPE IMap
+OPTIONS (
+'keyFormat'='int',
+'valueFormat'='json-flat'
+);

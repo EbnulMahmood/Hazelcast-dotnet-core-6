@@ -14,6 +14,10 @@ namespace Cache.Extensions
             services.AddSingleton<ICountriesService, CountriesService>(service =>
                 new CountriesService(hazelcastOptions)
             );
+
+            services.AddSingleton<IOrderService, OrderService>(service =>
+                new OrderService(hazelcastOptions)
+            );
         }
     }
 }

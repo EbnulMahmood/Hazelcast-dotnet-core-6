@@ -1,3 +1,4 @@
+using Cache.Extensions;
 using Cache.Services;
 using Hazelcast;
 
@@ -12,12 +13,10 @@ builder.Services.AddSwaggerGen();
 
 var hazelcastOptions = builder.Configuration.GetSection("hazelcast").Get<HazelcastOptions>();
 
+builder.Services.AddCacheService(hazelcastOptions);
+
 builder.Services.AddSingleton<IHazelcastService<string, int>, HazelcastService<string, int>>(service =>
     new HazelcastService<string, int>(hazelcastOptions, "login_attempts")
-);
-
-builder.Services.AddSingleton<ICitiesService, CitiesService>(service =>
-    new CitiesService(hazelcastOptions)
 );
 
 var app = builder.Build();
