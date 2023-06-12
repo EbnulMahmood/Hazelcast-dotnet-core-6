@@ -18,6 +18,11 @@ namespace Cache.Extensions
             services.AddSingleton<IOrderService, OrderService>(service =>
                 new OrderService(hazelcastOptions)
             );
+
+            services.AddSingleton<IOrderMapService, OrderMapService>(service =>
+                new OrderMapService(hazelcastOptions, "orderMap")
+            );
+
         }
     }
 }

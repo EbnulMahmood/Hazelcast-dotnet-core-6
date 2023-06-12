@@ -34,6 +34,8 @@ __key AS id
 FROM customer;
 ", cancellationToken: token).ConfigureAwait(false);
 
+                //await client.DisposeAsync().ConfigureAwait(false);
+
                 return await result.Select(row =>
                         new Customer
                         {
@@ -42,6 +44,7 @@ FROM customer;
                             address = row.GetColumn<string>("address"),
                         }
                     ).ToListAsync(cancellationToken: token).ConfigureAwait(false);
+
             }
             catch (Exception)
             {

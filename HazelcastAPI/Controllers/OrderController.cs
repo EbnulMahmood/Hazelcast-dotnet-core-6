@@ -8,10 +8,28 @@ namespace HazelcastAPI.Controllers
     public sealed class OrderController : ControllerBase
     {
         private readonly IOrderService _orderService;
+        private readonly IOrderMapService _orderMapService;
 
-        public OrderController(IOrderService orderService)
+        public OrderController(IOrderService orderService, IOrderMapService orderMapService)
         {
             _orderService = orderService;
+            _orderMapService = orderMapService;
+        }
+
+        [HttpGet]
+        [Route("/get-order-map/{key}")]
+        public async Task<IActionResult> GetOrder(string key, CancellationToken token = default) 
+        {
+            try
+            {
+                var order = await _orderMapService.GetOrderByKeyAsync(key, token).ConfigureAwait(false);
+                return Ok(order);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet]
